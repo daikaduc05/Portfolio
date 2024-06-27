@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.7.2/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col md:flex-row">
+    <!-- Vertical sidebar -->
+    <aside x-data="{ open: false }" class="bg-gray-900 text-white h-screen flex flex-col justify-between fixed inset-y-0 left-0 z-10 w-64">
+        <div class="p-4 flex flex-col h-full">
+            <div class="mb-8">
+                <!-- Avatar -->
+                <img src="{% static 'DUY_7250.jpg' %}" alt="Avatar" class="rounded-full w-32 h-32 mb-2 mx-auto">
+                <h1 class="text-2xl font-bold text-center mb-4">Dang Hoai Duc</h1>
+                <div class="flex justify-center space-x-4">
+                    <a href="https://github.com/daikaduc05" class="text-xl hover:text-gray-400"><i class="fab fa-github"></i></a>
+                    <a href="https://www.facebook.com/mainkayn05" class="text-xl hover:text-gray-400"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/dak_duk5/" class="text-xl hover:text-gray-400"><i class="fab fa-instagram"></i></a>
+                </div>
+                <ul class="mt-4 space-y-4">
+                    <li><a class="text-xl hover:text-gray-400 flex items-center" href="#home"><i class="fas fa-home mr-2"></i>Home</a></li>
+                    <li><a class="text-xl hover:text-gray-400 flex items-center" href="#about"><i class="fas fa-user mr-2"></i>About</a></li>
+                    <li><a class="text-xl hover:text-gray-400 flex items-center" href="#projects"><i class="fas fa-project-diagram mr-2"></i>Projects</a></li>
+                    <li><a class="text-xl hover:text-gray-400 flex items-center" href="#contact"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                </ul>
+            </div>
+            <div class="mt-auto">
+                <p class="text-center text-sm">&copy; 2024 Dang Hoai Duc</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="bg-gray-100 flex-1 ml-0 md:ml-64">
+        <section id="home" class="flex justify-center items-center h-screen text-center bg-cover bg-center" style="background-image: url('{% static "background.jpg" %}');">
+            <div class="text-white bg-black bg-opacity-50 p-8 rounded">
+                <h1 class="text-5xl font-bold mb-4">Welcome to My Website</h1>
+                <p class="text-2xl mb-6">I'm Dang Hoai Duc, a Backend Developer</p>
+                <a href="#projects" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">View My Work</a>
+            </div>
+        </section>
+        <section id="about" class="py-20 bg-gray-200">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-4">About Me</h2>
+                <p class="text-xl">I am [Your Name], a passionate [Your Profession] with experience in [Your Field].</p>
+            </div>
+        </section>
+        <section id="projects" class="py-20 bg-white">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-4">My Projects</h2>
+                <p class="text-xl">Here are some of my recent works:</p>
+                
+                <!-- Vòng lặp để hiển thị danh sách dự án -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+                    {% for project in projects %}
+                    <div class="border border-gray-300 p-4 rounded-lg">
+                        <!-- Ảnh dự án -->
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="mb-4 rounded-lg">
+                
+                        <!-- Tiêu đề dự án -->
+                        <h3 class="text-xl font-bold mb-2">{{ project.title }}</h3>
+                
+                        <!-- Mô tả dự án -->
+                        <p class="text-lg mb-2">{{ project.description }}</p>
+                
+                        <!-- Công nghệ sử dụng -->
+                        <p class="text-gray-500">{{ project.technology }}</p>
+                
+                        <!-- Ngày tạo -->
+                        <p class="text-gray-500">{{ project.date }}</p>
+                        
+                        <!-- Liên kết đến dự án -->
+                        {% if project.link %}
+                        <a href="{{ project.link }}" class="text-blue-500 hover:text-blue-700">View Project</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </section>
+        <section id="contact" class="py-20 bg-gray-200">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-4">Contact Me</h2>
+                <p class="text-xl">Feel free to reach out to me through any of the platforms below:</p>
+                <!-- Contact details here -->
+            </div>
+        </section>
+    </main>
+    <!-- Tailwind CSS script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.2/alpine.min.js" defer></script>
+    <!-- Font Awesome Icons script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
+</body>
+</html>
